@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+    <form class="card card-sm">
+      <div class="card-body row no-gutters align-items-center">
+        <div class="col">
+          <input type="search" name="item-name" class="form-control form-control-borderless"
+            placeholder="Entrer le nom de produit que vous chercher">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-success">Recherche</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  {% for product in products %}
+  <div class="col-md-3">
+    <div class="card">
+      <img style="width: 250px; height: 300px;" src="{{ product.image }}" alt="{{ product.title }}"
+        class="card-img-top">
+      <div class="card-body">
+        <div style="font-weight: bold;" class="card-title">{{ product.title }}</div>
+        <div style="font-weight: bold; color: orangered" class="card-text">${{ product.price }}</div>
+        <a href="{{ product.id }}" style="font-weight: bold;" class="btn btn-warning">Voir</a>
+        <button style="font-weight: bold;" class="btn ted btn-success">Ajouter</button>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="row mt-5">
+  <div class="col-md-3 offset-md-4">
+    <ul class="pagination">
+      {% if products.has_previous %}
+
+      <li class="page-item">
+        <a class="page-link" href="?page={{ products.previous_page_number }}">Précédent</a>
+      </li>
+      {% endif %}
+
+      <li class="page-item">
+        <a style="background-color:rgb(64, 120, 241); color: #eee;" class="page-link"
+          href="?page={{ products.number }}">{{ products.number }}</a>
+      </li>
+
+      {% if products.has_next %}
+
+      <li class="page-item">
+        <a class="page-link" href="?page={{ products.next_page_number }}">Suivant</a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+<script type="text/javascript" src="{% static 'shop/js/index.js' %}"></script>
+
+{% endblock %}
