@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Product
+from .models import Command, Product
 from django.core.paginator import Paginator
 
 
@@ -23,3 +23,19 @@ def index(request):
 def detail(request, id_product):
     product = Product.objects.get(id=id_product)
     return render(request, 'shop/detail.html', {'product': product})
+
+
+def panier(request):
+    
+    if request.method == 'POST':
+        nom = request.POST.get('nom')
+        email = request.POST.get('email')
+        address = request.POST.get('address')
+        ville = request.POST.get('ville')
+        pays = request.POST.get('pays')
+        codepostal = request.POST.get('codepostal')
+        
+        com = Command(nom=nom, email=email, address=address, ville=ville, pays=pays, codepostal=codepostal)
+        com.save()
+        
+    return render(request, 'shop/panier.html')

@@ -24,3 +24,16 @@ class Product(models.Model):
     
     class Meta:
         ordering = ['-date_added']
+        
+class Command(models.Model):
+    Items = models.CharField(max_length=300)
+    nom = models.CharField(max_length=128)
+    email = models.EmailField()
+    address = models.CharField(max_length=300)
+    ville = models.CharField(max_length=100)
+    pays = models.CharField(max_length=100)
+    codepostal = models.CharField(max_length=100)
+    date_command = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        ordering = ['-date_command',]

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-12">
+        <ul class="list-group" id="ul-product-name">
+            <h3 class="text-center">Voici votre liste d'article</h3>
+
+        </ul>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="nom">Nom</label>
+                    <input name="nom" type="text" class="form-control" id="nom" placeholder="Mack ABDI">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="Email">Email</label>
+                    <input name="email" type="email" class="form-control" id="Email" placeholder="mack.abdi@gmail.com">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="Address">Address</label>
+                <input name="address" type="text" class="form-control" id="Address" placeholder="1234 Main St">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="ville">Ville</label>
+                    <input name="ville" type="text" class="form-control" id="ville">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="pays">Pays</label>
+                    <select name="pays" id="pays" class="form-control">
+                        <option selected>Djibouti</option>
+                        <option>France</option>
+                        <option>Italy</option>
+                        <option>Somalia</option>
+                        <option>Germany</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="codepostal">Code postal</label>
+                    <input name="codepostal" type="text" class="form-control" id="codepostal">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Commander</button>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+<script type="text/javascript" src="{% static 'shop/js/panier.js' %}"></script>
+
+{% endblock %}
