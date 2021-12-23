@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-12">
+        <h3 style="margin: 5rem; color: rgb(236, 233, 233)" class="text-center bg-success">Bonjour {{ nom }}, nous
+            vous
+            remercions de votre
+            confiance.</h3>
+        <h4 class="text-center text-dark">Votre commande à été bien enregistrer. Vous allez recevoir dans 7 jours soit
+            le {{ date_livred|date:"l d F Y" }}</h4>
+        <h4 style="margin: 1.5rem;" class="text-center text-dark">Nous espèrons vous voir une prochaine fois :).</h4>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .models import Command, Product
 from django.core.paginator import Paginator
+import re
+import datetime
 
 
 def index(request):
@@ -28,6 +30,10 @@ def detail(request, id_product):
 def panier(request):
     
     if request.method == 'POST':
+        # items = re.sub(r'[^\w\s]', '', request.POST.get('items-article'))
+        items = request.POST.get('items-article').replace("\\", "")
+        quantity_total = request.POST.get('Quantity-Total')
+        price_total = request.POST.get('Price-Total')
         nom = request.POST.get('nom')
         email = request.POST.get('email')
         address = request.POST.get('address')
@@ -35,7 +41,26 @@ def panier(request):
         pays = request.POST.get('pays')
         codepostal = request.POST.get('codepostal')
         
-        com = Command(nom=nom, email=email, address=address, ville=ville, pays=pays, codepostal=codepostal)
+        com = Command(Items=items,
+                      quantity_total=quantity_total,
+                      price_total=price_total,
+                      nom=nom,
+                      email=email,
+                      address=address,
+                      ville=ville,
+                      pays=pays,
+                      codepostal=codepostal)
         com.save()
         
+        return redirect('confirmation')
+        
     return render(request, 'shop/panier.html')
+
+
+def confirmation(request):
+    info = Command.objects.all()[:1]
+    for i in info:
+        name = i.nom
+        date_livred = i.date_command
+    date_livred = date_livred + datetime.timedelta(days=7)
+    return render(request, 'shop/confirmation.html', context={"nom": name, "date_livred": date_livred})

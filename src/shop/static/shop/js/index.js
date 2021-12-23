@@ -1,7 +1,7 @@
 const btns_add = document.querySelectorAll(".bouton-add");
 const panier = document.getElementById("panier");
 // const product_title = document.querySelectorAll("product-title");
-// console.log(panier);
+// console.log(document.getElementById("product-title-1").innerHTML);
 
 if (localStorage.getItem("panier") === null) {
   var VarPanier = {};
@@ -30,11 +30,19 @@ btns_add.forEach((btn_add) => {
     if (VarPanier[item_id] !== undefined) {
       quantity = VarPanier[item_id][0] + 1;
       VarPanier[item_id][0] = quantity;
+      VarPanier[item_id][2] += parseFloat(
+        document.getElementById("product-price-" + item_id).innerHTML
+      );
     } else {
       quantity = 1;
       var name = document.getElementById("product-title-" + item_id).innerHTML;
-      VarPanier[item_id] = [quantity, name];
+      var price = parseFloat(
+        document.getElementById("product-price-" + item_id).innerHTML
+      );
+      VarPanier[item_id] = [quantity, name, price];
     }
+    // console.log(document.getElementById("product-price-" + item_id));
+    // console.log(VarPanier);
     localStorage.setItem("panier", JSON.stringify(VarPanier));
     panier.innerHTML = "Panier(" + Object.keys(VarPanier).length + ")";
     ShowNameProduct(VarPanier);
@@ -49,9 +57,7 @@ function ShowNameProduct(ListPanier) {
   for (var i in ListPanier) {
     VarListProduct += VarIndex;
     // console.log(document.getElementById("product-title-" + i).innerHTML.id);
-    VarListProduct += `${
-      document.getElementById("product-title-" + i).innerHTML
-    } Qte: ${ListPanier[i][0]}<br>`;
+    VarListProduct += ` ${ListPanier[i][1]} Qte: ${ListPanier[i][0]}<br>`;
     VarIndex += 1;
   }
   VarListProduct +=

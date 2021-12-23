@@ -26,7 +26,9 @@ class Product(models.Model):
         ordering = ['-date_added']
         
 class Command(models.Model):
-    Items = models.CharField(max_length=300)
+    Items = models.CharField(max_length=5000)
+    quantity_total = models.IntegerField(default=0)
+    price_total = models.CharField(max_length=128)
     nom = models.CharField(max_length=128)
     email = models.EmailField()
     address = models.CharField(max_length=300)
@@ -34,6 +36,9 @@ class Command(models.Model):
     pays = models.CharField(max_length=100)
     codepostal = models.CharField(max_length=100)
     date_command = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return self.nom
     
     class Meta:
         ordering = ['-date_command',]
