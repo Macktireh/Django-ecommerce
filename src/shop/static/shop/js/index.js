@@ -61,7 +61,7 @@ function ShowNameProduct(ListPanier) {
     VarIndex += 1;
   }
   VarListProduct +=
-    "<a style='margin-top:10px;' href='/panier' class='btn btn-primary'>Checkout</a>";
+    "<a style='margin-top:10px;' href='/panier' class='btn btn-primary'>Accéder au panier</a>";
   $('[data-toggle="popover"]').popover();
   // panier.setAttribute("data-content", VarListProduct);
   panier.setAttribute(

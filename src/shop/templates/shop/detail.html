@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 
@@ -9,17 +10,24 @@
         </div>
     </div>
     <div class="col-md-6">
-        <div class="text-warning display-3">
+        <div id="product-title" class="text-warning display-3">
             {{ product.title }}
         </div>
         <div class="text-danger">
-            Prix: ${{ product.price }}
+            Prix: $ <span id="product-price">{{ product.price }}</span>
         </div>
         <div>
             {{ product.description }}
         </div>
-        <a href="#"><button class="btn btn-success">Achèter</button></a>
+        <!-- <a href="#"><button class="btn btn-success">Achèter</button></a> -->
+        <button style="font-weight: bold;" id="{{ product.id }}" class="btn bouton-add btn-success">Ajouter</button>
     </div>
 </div>
+
+{% endblock %}
+
+{% block js %}
+
+<script type="text/javascript" src="{% static 'shop/js/detail.js' %}"></script>
 
 {% endblock %}
