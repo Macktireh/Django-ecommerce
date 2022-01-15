@@ -10,8 +10,8 @@ class AdminCategory(admin.ModelAdmin):
     search_fields = ('name',)
     
 class AdminProduct(admin.ModelAdmin):
-    list_display = ('title', 'price', 'category', 'date_added')
-    list_editable = ('price',)
+    list_display = ('date_added', 'title', 'price', 'category', 'image')
+    list_editable = ('title','price','category', 'image')
 class AdminCommand(admin.ModelAdmin):
     list_display = ('Items', 'quantity_total', 'price_total', 'nom', 'address', 'email', 'ville', 'pays', 'date_command')
     search_fields = ('nom', 'ville', 'pays',)
